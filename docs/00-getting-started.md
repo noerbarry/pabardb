@@ -2,7 +2,7 @@
  
 Dokumen ini menjelaskan **cara penggunaan PABAR DB dari sudut pandang USER**: mulai dari
 **create table (schema), login, insert, update, query, delete, list, index, dump/export, import, backup, restore, dan recovery**.
-Semua contoh menggunakan CLI `pabardb`.**
+Semua contoh menggunakan CLI `pabardb`.
 
 Catatan: PABAR DB adalah **embedded, local-first engine**. Autentikasi, role, dan UI berada di layer aplikasi.
 
@@ -28,10 +28,10 @@ Jika mydb.pbr belum ada, engine akan membuat struktur awal.
 
 Struktur minimal:
 
-mydb.pbr/
-├── manifest.json
-└── wal/
-    └── wal-active.log
+mydb.pbr
+  manifest.json 
+     wal
+       wal-active.log
 
 **2) “Create Table” (Definisi Schema)**
 PABAR DB tidak memakai tabel fisik seperti SQL. type bertindak sebagai logical table.
@@ -84,7 +84,7 @@ OK
 pabardb mydb.pbr "GET record R-1"
 Output:
  
-{"name":"Budi","age":30,"gender":"M"}
+{"name":"Barri","age":46,"gender":"M"}
 
 **6) Update Data**
 Update = PUT ulang dengan ID yang sama
@@ -190,8 +190,8 @@ Lihat event log
 pabardb mydb.pbr "LOG record R-1"
 Output:
 [
-  {"ts":"2026-01-11T10:00:00Z","op":"PUT","data":{"name":"Budi","age":30}},
-  {"ts":"2026-01-11T12:00:00Z","op":"PUT","data":{"name":"Budi","age":31}}
+  {"ts":"2026-01-11T10:00:00Z","op":"PUT","data":{"name":"Barri","age":46}},
+  {"ts":"2026-01-11T12:00:00Z","op":"PUT","data":{"name":"Ajrul","age":29}}
 ]
 
 **17) Role & Hak Akses (Contoh Kebijakan Aplikasi)**
@@ -241,7 +241,7 @@ tar -czf mydb-backup.tgz mydb.pbr
 tar -xzf mydb-backup.tgz
 pabardb mydb.pbr "RECOVER"
 
-19) Ringkasan Perintah
+**19) Ringkasan Perintah**
 Kategori	Perintah
 Create/Open	RECOVER
 Schema	PUT _schema <type> <json>
