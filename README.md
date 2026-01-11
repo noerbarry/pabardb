@@ -23,7 +23,7 @@ chmod +x build.sh install.sh
 
 
 
-**PABAR DB — User Guide (CLI & Concepts)**
+###PABAR DB — User Guide (CLI & Concepts)
 
 Dokumen ini menjelaskan **cara penggunaan PABAR DB dari sudut pandang USER**: mulai dari
 **create table (schema), login, insert, update, query, delete, list, index, dump/export, import, backup, restore, dan recovery**.
