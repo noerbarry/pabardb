@@ -1,8 +1,0 @@
-README.md
-pyproject.toml
-pabardb/__init__.py
-pabardb/client.py
-pabardb.egg-info/PKG-INFO
-pabardb.egg-info/SOURCES.txt
-pabardb.egg-info/dependency_links.txt
-pabardb.egg-info/top_level.txt
