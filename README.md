@@ -12,7 +12,6 @@ Dirancang untuk aplikasi on-prem, offline, dan edge, dengan format data berbasis
 - `libpabardb` — shared library + `pabardb.h` (C API)
 - Format database: `<name>.pbr/` (folder-based, WAL-backed)
 
----
 
 ## Quick Start (macOS / Linux)
 
@@ -23,8 +22,8 @@ chmod +x build.sh install.sh
 
 
 
-###PABAR DB — User Guide (CLI & Concepts)
-
+### PABAR DB — User Guide (CLI & Concepts)
+```bash
 Dokumen ini menjelaskan **cara penggunaan PABAR DB dari sudut pandang USER**: mulai dari
 **create table (schema), login, insert, update, query, delete, list, index, dump/export, import, backup, restore, dan recovery**.
 Semua contoh menggunakan CLI `pabardb`.**
