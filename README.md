@@ -23,18 +23,18 @@ chmod +x build.sh install.sh
 
 
 
-#PABAR DB — User Guide (CLI & Concepts)
+**PABAR DB — User Guide (CLI & Concepts)**
 
 Dokumen ini menjelaskan **cara penggunaan PABAR DB dari sudut pandang USER**: mulai dari
 **create table (schema), login, insert, update, query, delete, list, index, dump/export, import, backup, restore, dan recovery**.
-Semua contoh menggunakan CLI `pabardb`.
+Semua contoh menggunakan CLI `pabardb`.**
 
 > Catatan: PABAR DB adalah **embedded, local-first engine**. Autentikasi, role, dan UI berada di layer aplikasi.
 > Engine fokus pada **storage, WAL, durability, dan auditability**.
 
  
 
-## 0) Konsep Dasar
+**0) Konsep Dasar**
 
 - **Database** = folder `<name>.pbr/`
 - **Record key** = `<type>` + `<id>`
@@ -45,7 +45,7 @@ Semua contoh menggunakan CLI `pabardb`.
 
 Format umum:
  pabardb <db.pbr> "<COMMAND>"
-1) Membuat / Membuka Database
+**1) Membuat / Membuka Database**
  
 pabardb mydb.pbr "RECOVER"
 Jika mydb.pbr belum ada, engine akan membuat struktur awal.
@@ -57,7 +57,7 @@ mydb.pbr/
 └── wal/
     └── wal-active.log
 
-2) “Create Table” (Definisi Schema)
+**2) “Create Table” (Definisi Schema)**
 PABAR DB tidak memakai tabel fisik seperti SQL. type bertindak sebagai logical table.
 Namun kamu bisa mendefinisikan schema untuk validasi aplikasi.
 
@@ -76,7 +76,8 @@ _schema adalah namespace khusus untuk metadata. Engine menyimpan; aplikasi bisa 
 Lihat schema
  
 pabardb mydb.pbr "GET _schema record"
-3) Login & Manajemen User
+
+**3) Login & Manajemen User**
 Engine tidak mengatur autentikasi, tetapi data user disimpan di DB.
 
 Buat user
@@ -93,7 +94,7 @@ cek password
 
 baca role untuk hak akses
 
-4) Insert Data
+**4) Insert Data**
  
 pabardb mydb.pbr "PUT record R-1 '{\"name\":\"Barri\",\"age\":46,\"gender\":\"M\"}'"
 Output:
@@ -101,28 +102,31 @@ Output:
 nginx
 
 OK
-5) Query (Ambil Data)
+
+**5) Query (Ambil Data)**
  
 pabardb mydb.pbr "GET record R-1"
 Output:
-
-json
+ 
 {"name":"Budi","age":30,"gender":"M"}
-6) Update Data
+
+**6) Update Data**
 Update = PUT ulang dengan ID yang sama
 
 pabardb mydb.pbr "PUT record R-1 '{\"name\":\"Barri\",\"age\":3461,\"gender\":\"L\"}'"
-7) Delete Data (Soft Delete)
+
+
+**7) Delete Data (Soft Delete)**
 pabardb mydb.pbr "DEL record R-1"
 Data tidak dihapus fisik; dicatat sebagai event.
 
-8) List / Scan Data (per “table”)
+**8) List / Scan Data (per “table”)**
 Untuk membaca banyak record berdasarkan type:
 
 pabardb mydb.pbr "LIST record"
 Contoh output:
 
-json
+ 
 [
   {"id":"R-1","name":"Barri","age":46,"gender":"M"},
   {"id":"R-2","name":"Ajrul","age":29,"gender":"M"},
@@ -132,7 +136,7 @@ json
   {"id":"R-6","name":"Wildan","age":29,"gender":"M"}
 ]
 
-9) Index (Metadata)
+**9) Index (Metadata)**
 Index bersifat metadata agar aplikasi tahu field mana yang sering dicari.
 
 Buat index
@@ -143,7 +147,7 @@ Lihat index
 pabardb mydb.pbr "GET _index record"
 Engine menyimpan metadata; optimisasi eksekusi dapat ditambahkan di layer engine/app.
 
-10) Query dengan Filter (Konsep)
+**10) Query dengan Filter (Konsep)**
 CLI dasar membaca per key. Untuk filter:
 
  
@@ -155,7 +159,7 @@ Contoh hasil:
   {"id":"R-1","name":"Ajrul","age":29,"gender":"M"}
 ]
 
-11) Transaction (Konsep)
+**11) Transaction (Konsep)**
 PABAR DB bersifat event-based. Untuk operasi berurutan:
 
  
@@ -167,10 +171,10 @@ Jika terjadi error:
 
  
 pabardb mydb.pbr "ROLLBACK"
-12) Dump / Export Data
+
+**12) Dump / Export Data**
 Dump seluruh DB ke JSON
-bash
-Copy code
+ 
 pabardb mydb.pbr "DUMP JSON" > mydb_dump.json
 Dump satu “table”
  
@@ -180,7 +184,8 @@ Export CSV
  
 
 pabardb mydb.pbr "DUMP record CSV" > record.csv
-13) Import Data
+
+**13) Import Data**
 Import dari JSON
  
 
@@ -198,7 +203,7 @@ Restore
 tar -xzf mydb-backup.tgz
 pabardb mydb.pbr "RECOVER"
 
-15) Recovery (Crash / Power Loss)
+**15) Recovery (Crash / Power Loss)**
 
 pabardb mydb.pbr "RECOVER"
 Engine akan membaca WAL dan membangun ulang state terakhir.
@@ -208,18 +213,15 @@ Lihat event log
 
 pabardb mydb.pbr "LOG record R-1"
 Output:
-
-json
-Copy code
 [
   {"ts":"2026-01-11T10:00:00Z","op":"PUT","data":{"name":"Budi","age":30}},
   {"ts":"2026-01-11T12:00:00Z","op":"PUT","data":{"name":"Budi","age":31}}
 ]
-17) Role & Hak Akses (Contoh Kebijakan Aplikasi)
+
+**17) Role & Hak Akses (Contoh Kebijakan Aplikasi)**
 Struktur user:
 
-json
-Copy code
+ 
 {"username":"admin","role":"admin"}
 Kebijakan contoh:
 
@@ -231,7 +233,7 @@ viewer: GET
 
 Penegakan dilakukan di aplikasi yang memanggil PABAR DB.
 
-18) Contoh Alur Lengkap
+**18) Contoh Alur Lengkap**
 (1) Buat schema
  
 
@@ -281,7 +283,7 @@ Restore	tar -xzf <file> + RECOVER
 Audit/Log	LOG <type> <id>
 Transaction	BEGIN / COMMIT / ROLLBACK
 
-20) Catatan Akhir
+**20) Catatan Akhir**
 PABAR DB adalah storage engine: cepat, lokal, crash-safe.
 
 Login, role, dan UI dikelola oleh aplikasi.
