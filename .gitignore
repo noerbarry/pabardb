@@ -1,0 +1,21 @@
+# build outputs
+dist/
+engine/build/
+engine/build-*/
+
+# compiled objects/libs
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# editor/OS noise
+.DS_Store
+.vscode/
+.idea/
+
+# local databases
+*.pbr/
+
