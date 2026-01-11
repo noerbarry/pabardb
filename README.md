@@ -12,7 +12,6 @@ Dirancang untuk aplikasi on-prem, offline, dan edge, dengan format data berbasis
 - `libpabardb` — shared library + `pabardb.h` (C API)
 - Format database: `<name>.pbr/` (folder-based, WAL-backed)
 
----
 
 ## Quick Start (macOS / Linux)
 
@@ -20,4 +19,3 @@ Dirancang untuk aplikasi on-prem, offline, dan edge, dengan format data berbasis
 ```bash
 chmod +x build.sh install.sh
 ./build.sh
-
