@@ -19,3 +19,8 @@ engine/build-*/
 # local databases
 *.pbr/
 
+# installer outputs
+installer/**/*.dmg
+installer/**/*.exe
+installer/**/*.msi
+
