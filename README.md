@@ -20,3 +20,6 @@ Dirancang untuk aplikasi on-prem, offline, dan edge, dengan format data berbasis
 chmod +x build.sh install.sh
 ./build.sh
 
+
+
+## Quick Start (macOS / Linux)
