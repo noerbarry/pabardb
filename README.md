@@ -23,7 +23,7 @@ chmod +x build.sh install.sh
 
 
 
-# PABAR DB — User Guide (CLI & Concepts)
+#PABAR DB — User Guide (CLI & Concepts)
 
 Dokumen ini menjelaskan **cara penggunaan PABAR DB dari sudut pandang USER**: mulai dari
 **create table (schema), login, insert, update, query, delete, list, index, dump/export, import, backup, restore, dan recovery**.
@@ -32,7 +32,7 @@ Semua contoh menggunakan CLI `pabardb`.
 > Catatan: PABAR DB adalah **embedded, local-first engine**. Autentikasi, role, dan UI berada di layer aplikasi.
 > Engine fokus pada **storage, WAL, durability, dan auditability**.
 
----
+ 
 
 ## 0) Konsep Dasar
 
@@ -44,11 +44,9 @@ Semua contoh menggunakan CLI `pabardb`.
 - **Recovery** = membangun ulang state dari WAL
 
 Format umum:
-```bash
-pabardb <db.pbr> "<COMMAND>"
+ pabardb <db.pbr> "<COMMAND>"
 1) Membuat / Membuka Database
-bash
-Copy code
+ 
 pabardb mydb.pbr "RECOVER"
 Jika mydb.pbr belum ada, engine akan membuat struktur awal.
 
