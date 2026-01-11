@@ -20,13 +20,3 @@ Dirancang untuk aplikasi on-prem, offline, dan edge, dengan format data berbasis
 chmod +x build.sh install.sh
 ./build.sh
 
-
-
-
-
-**20) Catatan Akhir**
-PABAR DB adalah storage engine: cepat, lokal, crash-safe.
-
-Login, role, dan UI dikelola oleh aplikasi.
-
-Cocok untuk on-prem, offline, edge, dan aplikasi yang butuh audit & durability.
